@@ -1,4 +1,4 @@
-extends ISwitchable
+extends Switchable
 
 @export var door_left: Node3D
 @export var door_right: Node3D
@@ -24,12 +24,12 @@ func activate() -> void:
 	
 	var open_speed: float = 1.0 - (speed / 1.0)
 		
-	var tween_open: Tween = create_tween()
-	tween_open.tween_property(door_left, "position", door_left_end_position, open_speed)\
+	var tween_open_door: Tween = create_tween()
+	tween_open_door.tween_property(door_left, "position", door_left_end_position, open_speed)\
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_OUT)
-	tween_open.set_parallel()
-	tween_open.tween_property(door_right, "position", door_right_end_position, open_speed)\
+	tween_open_door.set_parallel()
+	tween_open_door.tween_property(door_right, "position", door_right_end_position, open_speed)\
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_OUT)
 
@@ -39,11 +39,11 @@ func deactivate() -> void:
 	
 	var close_speed: float = 1.0 - (speed / 1.0)
 	
-	var tween_close: Tween = create_tween()
-	tween_close.tween_property(door_left, "position", door_left_start_position, close_speed)\
+	var tween_close_door: Tween = create_tween()
+	tween_close_door.tween_property(door_left, "position", door_left_start_position, close_speed)\
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_IN)
-	tween_close.set_parallel()
-	tween_close.tween_property(door_right, "position", door_right_start_position, close_speed)\
+	tween_close_door.set_parallel()
+	tween_close_door.tween_property(door_right, "position", door_right_start_position, close_speed)\
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_IN)

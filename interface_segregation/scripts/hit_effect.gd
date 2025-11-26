@@ -18,5 +18,4 @@ func trigger_effect(origin: Vector3, normal: Vector3) -> void:
 	
 	particles.global_basis = new_basis
 	particles.global_position = origin
-	
 	particles.restart()

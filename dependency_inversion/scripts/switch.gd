@@ -8,8 +8,8 @@ func toggle() -> void:
 	if switchable == null:
 		return
 		
-	if switchable.has_meta("ISwitchable"):
-		var switch := (switchable.get_meta("ISwitchable") as ISwitchable)
+	if switchable.has_meta("Switchable"):
+		var switch := (switchable.get_meta("Switchable") as Switchable)
 		
 		if switch.is_active:
 			switch.deactivate()

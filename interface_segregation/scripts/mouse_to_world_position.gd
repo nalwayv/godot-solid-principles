@@ -13,7 +13,6 @@ func _get_mouse_world_space_position() -> Vector3:
 	if not camera:
 		return Vector3.ZERO
 	
-	# raycast from camera to get collision point
 	var mouse_position: Vector2 = get_viewport().get_mouse_position()
 	var from: Vector3 = camera.project_ray_origin(mouse_position)
 	var to: Vector3 = from + camera.project_ray_normal(mouse_position) * RAY_LENGTH

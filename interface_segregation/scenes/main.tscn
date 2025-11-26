@@ -1,7 +1,6 @@
-[gd_scene load_steps=13 format=4 uid="uid://cvr7jr2eik81x"]
+[gd_scene load_steps=12 format=4 uid="uid://cvr7jr2eik81x"]
 
 [ext_resource type="Script" uid="uid://dd3dl6hk30s0c" path="res://interface_segregation/scripts/mouse_to_world_position.gd" id="1_hros4"]
-[ext_resource type="Script" uid="uid://dgy4pim6wm7jq" path="res://interface_segregation/scripts/screen_to_deadzone.gd" id="2_mwy33"]
 [ext_resource type="PackedScene" uid="uid://deu7mhvtx5od8" path="res://interface_segregation/scenes/target_no_effect.tscn" id="3_kd7wl"]
 [ext_resource type="PackedScene" uid="uid://brpfbpdr5aq1j" path="res://interface_segregation/scenes/area.tscn" id="3_sa6u3"]
 [ext_resource type="PackedScene" uid="uid://d2ruo4s81otlk" path="res://interface_segregation/scenes/gun.tscn" id="4_jhcbc"]
@@ -66,15 +65,12 @@ transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 2.035, 1.6, -3.5)
 [node name="TargetNoExplode" parent="." instance=ExtResource("4_voram")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.272, 1.6, -3.5)
 
-[node name="WorldPosition" type="Node3D" parent="." node_paths=PackedStringArray("camera") groups=["to_world"]]
+[node name="WorldPosition" type="Node3D" parent="." node_paths=PackedStringArray("camera") groups=["world_position"]]
 script = ExtResource("1_hros4")
 camera = NodePath("../Camera3D")
 
 [node name="RayCast3D" type="RayCast3D" parent="WorldPosition"]
 collide_with_areas = true
-
-[node name="DeadZone" type="Node" parent="WorldPosition"]
-script = ExtResource("2_mwy33")
 
 [node name="CollisionPoint" type="MeshInstance3D" parent="WorldPosition"]
 editor_description = "helper for visual hit collision point"

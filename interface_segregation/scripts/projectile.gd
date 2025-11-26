@@ -1,6 +1,5 @@
 ## NOTE - in the unity project each projectile would check for a collision with the target
-## but for fast moving projectiles this sometimes measn they just fly though the collision box 
-## and are not registered as a hit, so the gun class uses a raycast to handle hit 
+## but for this im using a raycast to handle collision with target
 class_name Projectile
 extends RigidBody3D
 

@@ -1,4 +1,4 @@
-extends ISwitchable
+extends Switchable
 
 @export var rigidbody: RigidBody3D
 
