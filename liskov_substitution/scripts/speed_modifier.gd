@@ -16,10 +16,6 @@ func _exit_tree() -> void:
 	owner.remove_meta("SpeedModifier")
 
 
-func _ready() -> void:
-	timer.one_shot = true
-
-
 func modify_speed(multiplier: float, duration: float):
 	if _active:
 		# force stop timer
@@ -35,17 +31,17 @@ func modify_speed(multiplier: float, duration: float):
 
 
 func _apply_speed_modifier(multiplier: float, duration: float):
+	# apply speed effect
 	if not _active:
-		# apply speed effect
 		_active = true
 		if owner.has_meta("Movable"):
 			(owner.get_meta("Movable") as Movable).speed_multiplyer *= multiplier
 		timer.start(duration)
-		
+	
 	await timer.timeout
 	
+	# remove speed effect
 	if Time.get_ticks_msec() >= _duration:
-		# remove speed effect
 		_active = false
 		if owner.has_meta("Movable"):
 			(owner.get_meta("Movable") as Movable).speed_multiplyer /= multiplier

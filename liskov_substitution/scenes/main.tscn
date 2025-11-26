@@ -20,7 +20,7 @@ sky = SubResource("Sky_4j65w")
 tonemap_mode = 2
 glow_enabled = true
 
-[node name="Liscov" type="Node3D"]
+[node name="Main" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 5, 0)
