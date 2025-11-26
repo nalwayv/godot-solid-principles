@@ -1,0 +1,47 @@
+[gd_scene load_steps=10 format=3 uid="uid://iryn73x65j0k"]
+
+[ext_resource type="Script" uid="uid://cvhhxyqoujpgu" path="res://interface_segregation/scripts/hit_effect.gd" id="1_ync41"]
+[ext_resource type="Texture2D" uid="uid://cw5qoq1s846em" path="res://interface_segregation/assets/circle.png" id="2_payj7"]
+
+[sub_resource type="Curve" id="Curve_lwu78"]
+_data = [Vector2(0, 0.32585132), 0.0, 3.1397214, 0, 0, Vector2(1, 0.02399373), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_1fip4"]
+curve = SubResource("Curve_lwu78")
+
+[sub_resource type="Curve" id="Curve_jswk8"]
+_data = [Vector2(0, 0), 0.0, 1.735036, 0, 0, Vector2(0.9962825, 0.03405571), 0.14245564, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lwu78"]
+curve = SubResource("Curve_jswk8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1fip4"]
+angle_min = 1.0728835e-05
+angle_max = 1.0728835e-05
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_lwu78")
+alpha_curve = SubResource("CurveTexture_1fip4")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pgpo5"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_payj7")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_q3cxn"]
+material = SubResource("StandardMaterial3D_pgpo5")
+size = Vector2(1, 1)
+
+[node name="HitEffect" type="Node3D"]
+script = ExtResource("1_ync41")
+
+[node name="Particles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 1
+lifetime = 0.3
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_1fip4")
+draw_pass_1 = SubResource("PlaneMesh_q3cxn")

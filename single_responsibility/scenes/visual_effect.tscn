@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://u5rirradx1g3"]
+
+[sub_resource type="GDScript" id="GDScript_ap6o7"]
+script/source = "class_name VisualEffect
+extends Effect
+
+@export var cooldown: float = 2
+
+@onready var timer: Timer = $Timer
+
+
+func _ready() -> void:
+	var parent: Player = get_parent() as Player
+	if parent:
+		parent.hit_wall.connect(play_effect)
+
+
+func play_effect() -> void:
+	if timer.is_stopped():
+		timer.start(cooldown)
+		$Particles.restart()
+"
+
+[sub_resource type="Curve" id="Curve_0k2m5"]
+_data = [Vector2(0, 0), 0.0, 2.459326, 0, 0, Vector2(0.625731, 0.92134833), 0.0, 0.0, 0, 0, Vector2(1, 0.5617978), -2.8820245, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_767w5"]
+curve = SubResource("Curve_0k2m5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uu1fv"]
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_767w5")
+color = Color(0.85517746, 0.3988352, 3.85046e-07, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_628w0"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_o8nb8"]
+material = SubResource("StandardMaterial3D_628w0")
+size = Vector2(0.15, 0.15)
+
+[node name="VisualEffect" type="Node3D"]
+script = SubResource("GDScript_ap6o7")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="Particles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 2000
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_uu1fv")
+draw_pass_1 = SubResource("QuadMesh_o8nb8")

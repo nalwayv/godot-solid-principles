@@ -1,0 +1,219 @@
+[gd_scene load_steps=35 format=3 uid="uid://cplq7eal4jpqh"]
+
+[ext_resource type="Script" uid="uid://lsuxxbmw368f" path="res://liskov_substitution/scripts/player.gd" id="1_61tbw"]
+[ext_resource type="Script" uid="uid://dyqkf1jvnhsnd" path="res://liskov_substitution/scripts/player_mover.gd" id="2_5cj35"]
+[ext_resource type="Script" uid="uid://dbb01fhkpoaen" path="res://liskov_substitution/scripts/speed_modifier.gd" id="3_wmaro"]
+[ext_resource type="Script" uid="uid://milqp5g40euo" path="res://liskov_substitution/scripts/health.gd" id="4_b4ym2"]
+[ext_resource type="Texture2D" uid="uid://b3xbl7c3t651l" path="res://liskov_substitution/assets/lightning_particle.png" id="4_v4n8c"]
+[ext_resource type="Script" uid="uid://lvu0qnoey0u4" path="res://liskov_substitution/scripts/invulnerability.gd" id="5_j7muh"]
+[ext_resource type="Script" uid="uid://b1jk5xynpdho" path="res://liskov_substitution/scripts/audio_player.gd" id="6_aucer"]
+[ext_resource type="Texture2D" uid="uid://dcibyp0nmfihf" path="res://liskov_substitution/assets/shield_particle.png" id="6_mad7x"]
+[ext_resource type="AudioStream" uid="uid://7f5fwr7mr41r" path="res://liskov_substitution/assets/phaseJump1.ogg" id="7_wmstu"]
+[ext_resource type="AudioStream" uid="uid://bsn0404kcg2qf" path="res://liskov_substitution/assets/phaseJump2.ogg" id="8_mad7x"]
+[ext_resource type="AudioStream" uid="uid://c02ai88dwohff" path="res://liskov_substitution/assets/phaseJump3.ogg" id="9_v4n8c"]
+[ext_resource type="Script" uid="uid://cbf7d23mvdjy5" path="res://liskov_substitution/scripts/health_bar.gd" id="10_wmstu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yrsy3"]
+albedo_color = Color(0.9140611, 0.48727238, 0.1596911, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_yrsy3"]
+material = SubResource("StandardMaterial3D_yrsy3")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_61tbw"]
+
+[sub_resource type="Curve" id="Curve_3u7j1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7491857, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_el0ps"]
+curve = SubResource("Curve_3u7j1")
+
+[sub_resource type="Curve" id="Curve_ox18k"]
+_data = [Vector2(0, 0.33289468), 0.0, 0.0, 0, 0, Vector2(0.39739415, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_t3l4i"]
+curve = SubResource("Curve_ox18k")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bp6qr"]
+gravity = Vector3(0, 0, 0)
+scale_min = 1.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_t3l4i")
+alpha_curve = SubResource("CurveTexture_el0ps")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_45p3x"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("4_v4n8c")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_l8e5s"]
+material = SubResource("StandardMaterial3D_45p3x")
+
+[sub_resource type="Curve" id="Curve_v4n8c"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.69706845, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.2217105), -2.4506164, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_3u7j1"]
+curve = SubResource("Curve_v4n8c")
+
+[sub_resource type="Curve" id="Curve_el0ps"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(0.5179153, 0.905921), 0.0, 0.0, 0, 0, Vector2(1, 0.42697364), -1.6157898, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ox18k"]
+curve = SubResource("Curve_el0ps")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wmstu"]
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_ox18k")
+alpha_curve = SubResource("CurveTexture_3u7j1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t3l4i"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("6_mad7x")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mad7x"]
+material = SubResource("StandardMaterial3D_t3l4i")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3u7j1"]
+random_volume_offset_db = 0.6
+streams_count = 3
+stream_0/stream = ExtResource("7_wmstu")
+stream_1/stream = ExtResource("8_mad7x")
+stream_2/stream = ExtResource("9_v4n8c")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_wmstu"]
+viewport_path = NodePath("HealthBar/SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mad7x"]
+bg_color = Color(0.4006977, 0.40069774, 0.40069756, 1)
+border_width_bottom = 3
+border_color = Color(0.20871031, 0.20871007, 0.2087102, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_bottom = 3.0
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v4n8c"]
+bg_color = Color(0.31593785, 0.66841996, 1.1551381e-06, 1)
+border_width_bottom = 3
+border_color = Color(0.15925327, 0.36433437, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_bottom = 3.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_3u7j1"]
+font_size = 52
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
+editor_description = "trying out components being attached to parent using metadata."
+script = ExtResource("1_61tbw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_yrsy3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_61tbw")
+
+[node name="Movable" type="Node3D" parent="."]
+script = ExtResource("2_5cj35")
+
+[node name="SpeedModifier" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4852014, 0)
+script = ExtResource("3_wmaro")
+
+[node name="Timer" type="Timer" parent="SpeedModifier"]
+one_shot = true
+
+[node name="Particles" type="GPUParticles3D" parent="SpeedModifier"]
+emitting = false
+amount = 1
+one_shot = true
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_bp6qr")
+draw_pass_1 = SubResource("PlaneMesh_l8e5s")
+
+[node name="Health" type="Node3D" parent="."]
+script = ExtResource("4_b4ym2")
+start_health = 50.0
+
+[node name="Invulnerability" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4214742, 0)
+script = ExtResource("5_j7muh")
+
+[node name="Timer" type="Timer" parent="Invulnerability"]
+one_shot = true
+
+[node name="Particles" type="GPUParticles3D" parent="Invulnerability"]
+emitting = false
+amount = 1
+lifetime = 1.5
+one_shot = true
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_wmstu")
+draw_pass_1 = SubResource("PlaneMesh_mad7x")
+
+[node name="AudioPlayer" type="Node3D" parent="."]
+script = ExtResource("6_aucer")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer3D" parent="AudioPlayer"]
+stream = SubResource("AudioStreamRandomizer_3u7j1")
+
+[node name="HealthBar" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -1)
+script = ExtResource("10_wmstu")
+
+[node name="Sprite3D" type="Sprite3D" parent="HealthBar"]
+billboard = 1
+texture = SubResource("ViewportTexture_wmstu")
+
+[node name="Timer" type="Timer" parent="HealthBar"]
+one_shot = true
+
+[node name="SubViewport" type="SubViewport" parent="HealthBar"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(418, 70)
+render_target_update_mode = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="HealthBar/SubViewport"]
+offset_right = 420.0
+offset_bottom = 72.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HealthBar/SubViewport/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="ProgressBar" type="ProgressBar" parent="HealthBar/SubViewport/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_mad7x")
+theme_override_styles/fill = SubResource("StyleBoxFlat_v4n8c")
+max_value = 1.0
+value = 0.5
+show_percentage = false
+
+[node name="Label" type="Label" parent="HealthBar/SubViewport/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "100%"
+label_settings = SubResource("LabelSettings_3u7j1")

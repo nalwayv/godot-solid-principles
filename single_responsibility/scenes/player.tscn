@@ -1,0 +1,84 @@
+[gd_scene load_steps=15 format=3 uid="uid://y1drcrstjr8p"]
+
+[ext_resource type="Script" uid="uid://boii5kq0jkhw8" path="res://single_responsibility/scripts/player.gd" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://csovyvogkum8u" path="res://single_responsibility/scripts/sound_effect.gd" id="3_pcloh"]
+[ext_resource type="AudioStream" uid="uid://bni3tj6gce8wx" path="res://single_responsibility/assets/phaser_up.ogg" id="4_37on6"]
+[ext_resource type="AudioStream" uid="uid://b5osk8aqxguye" path="res://single_responsibility/assets/phaser_up2.ogg" id="5_ng4ao"]
+[ext_resource type="Script" uid="uid://dns5gue5by8v1" path="res://single_responsibility/scripts/visual_effect.gd" id="6_eu6vg"]
+[ext_resource type="Texture2D" uid="uid://ctu238agils7s" path="res://single_responsibility/assets/circle_particle.png" id="7_xd3d8"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bo1nx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8gbba"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_pcloh"]
+streams_count = 2
+stream_0/stream = ExtResource("4_37on6")
+stream_1/stream = ExtResource("5_ng4ao")
+
+[sub_resource type="Curve" id="Curve_7uooe"]
+_data = [Vector2(0, 0.06909537), 0.0, 0.0, 0, 0, Vector2(1, 0.97550255), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_nwck3"]
+curve = SubResource("Curve_7uooe")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v5fca"]
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_nwck3")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ylfi"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(0.98516446, 0.61757, 0, 1)
+albedo_texture = ExtResource("7_xd3d8")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2h3sh"]
+material = SubResource("StandardMaterial3D_7ylfi")
+
+[node name="Player" type="CharacterBody3D"]
+collision_mask = 129
+script = ExtResource("1_v0iea")
+
+[node name="BodyMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_bo1nx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_8gbba")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.526511, 0.850168, 0, -0.850168, 0.526511, 0, 2.30809, -1.4281138)
+text = "player"
+font_size = 256
+outline_size = 24
+
+[node name="Sound" type="Node3D" parent="."]
+script = ExtResource("3_pcloh")
+
+[node name="Timer" type="Timer" parent="Sound"]
+one_shot = true
+autostart = true
+
+[node name="Sound" type="AudioStreamPlayer3D" parent="Sound"]
+stream = SubResource("AudioStreamRandomizer_pcloh")
+
+[node name="Effect" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.448767, 0)
+script = ExtResource("6_eu6vg")
+
+[node name="Timer" type="Timer" parent="Effect"]
+one_shot = true
+autostart = true
+
+[node name="Particles" type="GPUParticles3D" parent="Effect"]
+emitting = false
+amount = 1
+one_shot = true
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_v5fca")
+draw_pass_1 = SubResource("PlaneMesh_2h3sh")

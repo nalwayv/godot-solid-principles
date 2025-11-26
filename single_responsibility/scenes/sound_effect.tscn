@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://dd1w58bo1d6hw"]
+
+[ext_resource type="AudioStream" uid="uid://bni3tj6gce8wx" path="res://single_responsibility/assets/phaser_up.ogg" id="2_l64j1"]
+[ext_resource type="AudioStream" uid="uid://b5osk8aqxguye" path="res://single_responsibility/assets/phaser_up2.ogg" id="3_rq0f1"]
+
+[sub_resource type="GDScript" id="GDScript_2m2rf"]
+script/source = "class_name SoundEffect
+extends Effect
+
+@export var cooldown: float = 2
+
+@onready var timer: Timer = $Timer
+
+
+func _ready() -> void:
+	var parent: Player = get_parent() as Player
+	if parent:
+		parent.hit_wall.connect(play_effect)
+
+
+func play_effect() -> void:
+	if timer.is_stopped():
+		timer.start(cooldown)
+		$Sound.play()
+"
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hln2y"]
+streams_count = 2
+stream_0/stream = ExtResource("2_l64j1")
+stream_1/stream = ExtResource("3_rq0f1")
+
+[node name="SoundEffect" type="Node3D"]
+script = SubResource("GDScript_2m2rf")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="Sound" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_hln2y")

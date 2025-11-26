@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://drwbsxwmvno6j"]
+
+[ext_resource type="PackedScene" uid="uid://invid6mnrwoa" path="res://open_closed/scenes/area.tscn" id="1_qxucx"]
+[ext_resource type="PackedScene" uid="uid://x5uij50uj7od" path="res://open_closed/scenes/player.tscn" id="2_mwid7"]
+[ext_resource type="PackedScene" uid="uid://b3l063lwrtm4b" path="res://open_closed/scenes/square_effect.tscn" id="3_5g10q"]
+[ext_resource type="PackedScene" uid="uid://c0cmlsebpnaxl" path="res://open_closed/scenes/circle_effect.tscn" id="3_056tg"]
+[ext_resource type="PackedScene" uid="uid://dfpa3jnu73ubs" path="res://open_closed/scenes/triangle_effect.tscn" id="4_wn5c4"]
+[ext_resource type="PackedScene" uid="uid://uhkkfe150rdu" path="res://open_closed/scenes/hexagon_effect.tscn" id="6_n2npb"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x6f11"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_056tg"]
+sky_material = SubResource("ProceduralSkyMaterial_x6f11")
+
+[sub_resource type="Environment" id="Environment_5g10q"]
+background_mode = 2
+sky = SubResource("Sky_056tg")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_sljms"]
+font_size = 32
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[node name="OpenClosed" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 45.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5g10q")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.3239174, 0.9460854, 0, -0.9460854, 0.3239174, 0.322, 12.066, 6.528)
+
+[node name="Area" parent="." instance=ExtResource("1_qxucx")]
+
+[node name="CircleEffect" parent="." instance=ExtResource("3_056tg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5)
+
+[node name="SquareEffect" parent="." instance=ExtResource("3_5g10q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
+width = 2.0
+height = 2.0
+
+[node name="TriangleEffect" parent="." instance=ExtResource("4_wn5c4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5)
+side_length = 2
+
+[node name="HexagonEffect" parent="." instance=ExtResource("6_n2npb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5)
+
+[node name="Player" parent="." instance=ExtResource("2_mwid7")]
+
+[node name="InfoContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="InfoContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Open Closed"
+label_settings = SubResource("LabelSettings_sljms")

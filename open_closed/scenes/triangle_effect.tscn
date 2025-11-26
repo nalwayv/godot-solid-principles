@@ -1,0 +1,74 @@
+[gd_scene load_steps=11 format=3 uid="uid://dfpa3jnu73ubs"]
+
+[ext_resource type="Script" uid="uid://hfw4i0a5ofli" path="res://open_closed/scripts/triangle_effect.gd" id="1_l2p40"]
+[ext_resource type="AudioStream" uid="uid://d4aa32vi14oah" path="res://open_closed/assets/pepSound3.ogg" id="2_l2p40"]
+[ext_resource type="Script" uid="uid://b25eup7anmrr7" path="res://open_closed/scripts/effect_trigger.gd" id="3_ndtfc"]
+[ext_resource type="Texture2D" uid="uid://bxh6y0l4yr6kf" path="res://open_closed/assets/triangle_particle.png" id="3_nqk1p"]
+
+[sub_resource type="Curve" id="Curve_x0ebk"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.50814337, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_dyuau"]
+curve = SubResource("Curve_x0ebk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_var28"]
+gravity = Vector3(0, 0, 0)
+scale_min = 3.5
+scale_max = 3.5
+scale_curve = SubResource("CurveTexture_dyuau")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h0ljm"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_texture = ExtResource("3_nqk1p")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ijbhn"]
+material = SubResource("StandardMaterial3D_h0ljm")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nqk1p"]
+radius = 3.0
+
+[node name="TriangleEffect" type="Node3D" node_paths=PackedStringArray("audio", "label_text", "effect")]
+script = ExtResource("1_l2p40")
+audio = NodePath("AudioPlayer")
+label_text = NodePath("Labels/LabelText")
+effect = NodePath("Particles")
+
+[node name="Labels" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9599668, -0.28011388, 0, 0.28011388, 0.9599668, 0, 0.7308532, 0)
+
+[node name="NameLabel" type="Label3D" parent="Labels"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1.9855058e-08, -1.5099361)
+text = "Triangle
+"
+font_size = 256
+outline_size = 64
+
+[node name="LabelText" type="Label3D" parent="Labels"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 1.4314538)
+font_size = 128
+outline_size = 64
+
+[node name="AudioPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_l2p40")
+
+[node name="Particles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+emitting = false
+amount = 1
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_var28")
+draw_pass_1 = SubResource("PlaneMesh_ijbhn")
+
+[node name="Trigger" type="Area3D" parent="."]
+script = ExtResource("3_ndtfc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Trigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_nqk1p")
+debug_color = Color(0.8531841, 0.83446646, 0.4498114, 0.41960785)
+
+[connection signal="body_entered" from="Trigger" to="Trigger" method="_on_body_entered"]
+[connection signal="body_exited" from="Trigger" to="Trigger" method="_on_body_exited"]

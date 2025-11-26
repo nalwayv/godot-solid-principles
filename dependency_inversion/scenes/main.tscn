@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://cvauqxk5s2rg4"]
+
+[ext_resource type="PackedScene" uid="uid://beh8oep1e3d4j" path="res://dependency_inversion/scenes/area.tscn" id="1_k4dmv"]
+[ext_resource type="PackedScene" uid="uid://djr27qa88ooyy" path="res://dependency_inversion/scenes/trap_door.tscn" id="2_j5evj"]
+[ext_resource type="PackedScene" uid="uid://bamcj04j7kmu2" path="res://dependency_inversion/scenes/door.tscn" id="2_l4nba"]
+[ext_resource type="PackedScene" uid="uid://c3h4n851c8wsk" path="res://dependency_inversion/scenes/box.tscn" id="3_g0i85"]
+[ext_resource type="PackedScene" uid="uid://47lyrn2aaf4w" path="res://dependency_inversion/scenes/switch.tscn" id="5_0pe2j"]
+[ext_resource type="Script" uid="uid://ql3ta2nav4sx" path="res://dependency_inversion/scripts/ray_picker.gd" id="6_8l08g"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kx0k5"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_k4dmv"]
+sky_material = SubResource("ProceduralSkyMaterial_kx0k5")
+
+[sub_resource type="Environment" id="Environment_l4nba"]
+background_mode = 2
+sky = SubResource("Sky_k4dmv")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Main" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 10.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_l4nba")
+
+[node name="CameraRayPicker" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.82498527, 0.5651542, 0, -0.5651542, 0.82498527, 0, 4.2516637, 5.9555664)
+script = ExtResource("6_8l08g")
+method_name = "on_toggle"
+
+[node name="RayCast3D" type="RayCast3D" parent="CameraRayPicker"]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+
+[node name="Area" parent="." instance=ExtResource("1_k4dmv")]
+
+[node name="Door" parent="." instance=ExtResource("2_l4nba")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="Box" parent="." instance=ExtResource("3_g0i85")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.014371, 0.175, -1.0204495)
+
+[node name="TrapDoor" parent="." instance=ExtResource("2_j5evj")]
+transform = Transform3D(0.9999999, 0, 3.5527137e-15, 0, 1, 0, -3.5527137e-15, 0, 0.9999999, -4, -0.05, -1)
+
+[node name="Switch1" parent="." node_paths=PackedStringArray("switchable") instance=ExtResource("5_0pe2j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.0474288, 1.656)
+switchable = NodePath("../TrapDoor")
+
+[node name="Switch2" parent="." node_paths=PackedStringArray("switchable") instance=ExtResource("5_0pe2j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.0474288, 1.656)
+switchable = NodePath("../Door")

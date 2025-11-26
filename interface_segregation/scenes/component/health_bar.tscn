@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://bt0861mj4g7w8"]
+
+[ext_resource type="Script" uid="uid://blwhik5qatsa5" path="res://interface_segregation/scripts/target_health_bar.gd" id="1_wko31"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_wko31"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pgpo5"]
+bg_color = Color(0.4045111, 0.40451118, 0.40451103, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q3cxn"]
+bg_color = Color(0.9471994, 0.9471994, 0.9471994, 1)
+
+[node name="HealthBar" type="Node3D"]
+script = ExtResource("1_wko31")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = SubResource("ViewportTexture_wko31")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(110, 26)
+
+[node name="CenterContainer" type="MarginContainer" parent="SubViewport"]
+offset_right = 110.0
+offset_bottom = 26.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport/CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 16)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_pgpo5")
+theme_override_styles/fill = SubResource("StyleBoxFlat_q3cxn")
+max_value = 1.0
+value = 1.0
+show_percentage = false

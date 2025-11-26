@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=4 uid="uid://d2ruo4s81otlk"]
+
+[ext_resource type="Script" uid="uid://bsvg7duvwwm3j" path="res://interface_segregation/scripts/aim_at_mouse.gd" id="1_uqrbp"]
+[ext_resource type="Script" uid="uid://cb7c2qqouprdc" path="res://interface_segregation/scripts/turret_gun.gd" id="1_vxc8a"]
+[ext_resource type="Script" uid="uid://dad05il01ea78" path="res://interface_segregation/scripts/object_pool.gd" id="2_8wvk0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_57cnv"]
+albedo_color = Color(0.31061712, 0.31061712, 0.3106171, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_uqrbp"]
+_surfaces = [{
+"aabb": AABB(-0.5, -0.048095703, -0.5, 1, 0.096191406, 1),
+"attribute_data": PackedByteArray("AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/"),
+"format": 34359738391,
+"material": SubResource("StandardMaterial3D_57cnv"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 36,
+"vertex_data": PackedByteArray("AAAAvwAARb0AAAA/AAAAvwAARb0AAAC/AAAAvwAART0AAAC/AAAAPwAARb0AAAC/AAAAvwAARb0AAAC/AAAAvwAARb0AAAA/AAAAvwAART0AAAC/AAAAvwAARb0AAAC/AAAAPwAARb0AAAC/AAAAvwAART0AAAC/AAAAvwAART0AAAA/AAAAvwAARb0AAAA/AAAAvwAARb0AAAA/AAAAvwAART0AAAA/AAAAPwAART0AAAA/AAAAPwAART0AAAA/AAAAvwAART0AAAA/AAAAvwAART0AAAC/AAAAvwAARb0AAAA/AAAAPwAARb0AAAA/AAAAPwAARb0AAAC/AAAAPwAART0AAAA/AAAAPwAARb0AAAA/AAAAvwAARb0AAAA/AAAAPwAARb0AAAC/AAAAPwAARb0AAAA/AAAAPwAART0AAAA/AAAAPwAARb0AAAC/AAAAPwAART0AAAC/AAAAvwAART0AAAC/AAAAvwAART0AAAC/AAAAPwAART0AAAC/AAAAPwAART0AAAA/AAAAPwAART0AAAA/AAAAPwAART0AAAC/AAAAPwAARb0AAAC/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//38AAP//AAD/fwAA//8AAP9/AAD//wAA/////wAA/z//////AAD/P/////8AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//////AAD/f/////8AAP9//////wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8/////f/9//n////9//3/+f////3//f/5//////wAA/z//////AAD/P/////8AAP8//3//////AAD/f/////8AAP9//////wAA////f/9//n////9//3/+f////3//f/5/")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uqrbp"]
+albedo_color = Color(0.30980393, 0.30980393, 0.30980393, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_vxc8a"]
+_surfaces = [{
+"aabb": AABB(-0.075683594, -0.12841797, -0.60965705, 0.15136719, 0.25683594, 1.2193141),
+"attribute_data": PackedByteArray("AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/"),
+"format": 34359738391,
+"material": SubResource("StandardMaterial3D_uqrbp"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 36,
+"vertex_data": PackedByteArray("AACbvQCAA758Ehw/AACbvQCAA758Ehy/AACbvQCAAz58Ehy/AACbPQCAA758Ehy/AACbvQCAA758Ehy/AACbvQCAA758Ehw/AACbvQCAAz58Ehy/AACbvQCAA758Ehy/AACbPQCAA758Ehy/AACbvQCAAz58Ehy/AACbvQCAAz58Ehw/AACbvQCAA758Ehw/AACbvQCAA758Ehw/AACbvQCAAz58Ehw/AACbPQCAAz58Ehw/AACbPQCAAz58Ehw/AACbvQCAAz58Ehw/AACbvQCAAz58Ehy/AACbvQCAA758Ehw/AACbPQCAA758Ehw/AACbPQCAA758Ehy/AACbPQCAAz58Ehw/AACbPQCAA758Ehw/AACbvQCAA758Ehw/AACbPQCAA758Ehy/AACbPQCAA758Ehw/AACbPQCAAz58Ehw/AACbPQCAA758Ehy/AACbPQCAAz58Ehy/AACbvQCAAz58Ehy/AACbvQCAAz58Ehy/AACbPQCAAz58Ehy/AACbPQCAAz58Ehw/AACbPQCAAz58Ehw/AACbPQCAAz58Ehy/AACbPQCAA758Ehy/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//38AAP//AAD/fwAA//8AAP9/AAD//wAA/////wAA/z//////AAD/P/////8AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//////AAD/f/////8AAP9//////wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8/////f/9//n////9//3/+f////3//f/5//////wAA/z//////AAD/P/////8AAP8//3//////AAD/f/////8AAP9//////wAA////f/9//n////9//3/+f////3//f/5/")
+}]
+
+[node name="TurretGun" type="Node3D" node_paths=PackedStringArray("pool")]
+script = ExtResource("1_vxc8a")
+pool = NodePath("Pool")
+
+[node name="StandMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.048095703, 0.002)
+mesh = SubResource("ArrayMesh_uqrbp")
+
+[node name="AimAtMouse" type="Node3D" parent="."]
+script = ExtResource("1_uqrbp")
+
+[node name="Pool" type="Node3D" parent="."]
+script = ExtResource("2_8wvk0")
+
+[node name="Pan" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10103336, 0)
+
+[node name="Tilt" type="Node3D" parent="Pan"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2971903, -0.09462091)
+
+[node name="GunMesh" type="MeshInstance3D" parent="Pan/Tilt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1665062, -0.14034829)
+mesh = SubResource("ArrayMesh_vxc8a")
+
+[node name="MuzzelMarker" type="Marker3D" parent="Pan/Tilt"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1886917, -1.01279)
+
+[node name="RayCast3D" type="RayCast3D" parent="Pan/Tilt/MuzzelMarker"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+target_position = Vector3(0, -25, 0)
+debug_shape_thickness = 3
+
+[node name="ShootTimer" type="Timer" parent="."]
+one_shot = true
