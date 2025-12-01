@@ -6,6 +6,7 @@ extends Node3D
 
 var _time: float
 
+
 func _process(delta: float) -> void:
 	_time += delta
 	var new_y: float = amplitude * absf(sin(_time * frequency))

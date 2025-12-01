@@ -12,14 +12,11 @@ func _enter_tree() -> void:
 	owner.set_meta("HealthBar", self)
 
 
-func _exit_tree() -> void:
-	owner.remove_meta("HealthBar")
-
-
 func _ready() -> void:
 	if owner.has_meta("Health"):
 		var health = (owner.get_meta("Health") as Health)
 		health.health_changed.connect(_update_health_bar)
+		_update_health_bar(health.start_health / health.max_health)
 
 
 func _update_health_bar(health_value: float) -> void:
@@ -28,7 +25,7 @@ func _update_health_bar(health_value: float) -> void:
 	
 	_lerp_health_bar(health_value)
 	progress_bar.value = health_value
-	label.text = str(health_value*100)
+	label.text = str(health_value * 100)
 
 
 func _lerp_health_bar(target: float) -> void:

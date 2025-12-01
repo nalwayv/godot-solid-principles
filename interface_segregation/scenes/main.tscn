@@ -36,10 +36,6 @@ _surfaces = [{
 }]
 
 [node name="Main" type="Node3D"]
-editor_description = "Interface Segregation Principle
-NOTE - in the unity project the projectile handles collision with the target collider but im using a raycast.
-
-"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.24999999, 0.22463617, 0.10974324, 0.96824324, -0.4466975, 0.8946822, 0.0022298694, 0, 3.3290431, 0)

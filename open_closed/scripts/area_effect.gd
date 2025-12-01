@@ -43,7 +43,6 @@ func _play_particle_effect() -> void:
 	if not effect:
 		return
 	effect.restart()
-	#effect.emitting = true
 
 
 func _play_sound_effect() -> void:

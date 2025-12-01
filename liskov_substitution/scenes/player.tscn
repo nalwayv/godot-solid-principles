@@ -149,7 +149,6 @@ draw_pass_1 = SubResource("PlaneMesh_l8e5s")
 
 [node name="Health" type="Node3D" parent="."]
 script = ExtResource("4_b4ym2")
-start_health = 50.0
 
 [node name="Invulnerability" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4214742, 0)

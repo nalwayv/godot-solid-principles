@@ -12,13 +12,10 @@ func _enter_tree() -> void:
 	owner.set_meta("SpeedModifier", self)
 
 
-func _exit_tree() -> void:
-	owner.remove_meta("SpeedModifier")
-
-
 func modify_speed(multiplier: float, duration: float):
+	## godot unlike unity does not have a StopCoroutine
+	## but by using a timers timeout signal can get something similar 
 	if _active:
-		# force stop timer
 		timer.stop()
 		timer.timeout.emit()
 		

@@ -14,10 +14,6 @@ func _enter_tree() -> void:
 	owner.set_meta("Movable", self)
 
 
-func _exit_tree() -> void:
-	owner.remove_meta("Movable")
-
-
 func _ready() -> void:
 	_parent = get_parent() as CharacterBody3D
 

@@ -2,6 +2,7 @@ extends Switchable
 
 @export var door_left: Node3D
 @export var door_right: Node3D
+
 @export var door_left_offset: Vector3
 @export var door_right_offset: Vector3
 @export_range(0, 1) var speed: float
@@ -32,8 +33,8 @@ func activate() -> void:
 	tween_open_door.tween_property(door_right, "position", door_right_end_position, open_speed)\
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_OUT)
-
-
+	
+	
 func deactivate() -> void:
 	is_active = false
 	

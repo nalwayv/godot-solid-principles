@@ -33,3 +33,4 @@ transform = Transform3D(1, 0, 0, 0, 0.25881907, 0.9659258, 0, -0.9659258, 0.2588
 
 [node name="Player" parent="." instance=ExtResource("2_r0eaa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+move_speed = 7.0
