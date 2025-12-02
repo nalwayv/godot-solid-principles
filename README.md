@@ -13,4 +13,9 @@ Using Godot version 4.5.1
 
 Screenshots can be found in the .github file
 
-GDscript does not have interfaces unless you use C# but you can create abstract classes or use composition, the docs have a page talking about this called [Godot's design philosophy](https://docs.godotengine.org/en/stable/getting_started/introduction/godot_design_philosophy.html)
+GdScript does not have interfaces like Csharp but the [Godot's design philosophy](https://docs.godotengine.org/en/stable/getting_started/introduction/godot_design_philosophy.html) talks about using oop and composition.
+
+## ⭐ Acknowledgements
+Assest from [Kenney](https://kenney.nl/)
+
+RyanJuckett.com [Damped springs](https://www.ryanjuckett.com/damped-springs/)
