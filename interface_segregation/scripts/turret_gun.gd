@@ -3,8 +3,8 @@ extends Node3D
 
 const ProjectileScene: PackedScene = preload("uid://d1vhhuefby40m")
 
-@export var muzzel_velocity: float = 20
-@export var fire_rate: float = 15
+@export var muzzel_velocity: float = 20.0
+@export var fire_rate: float = 15.0
 @export var pool: ObjectPool
 
 @onready var muzzel_marker: Marker3D = %MuzzelMarker

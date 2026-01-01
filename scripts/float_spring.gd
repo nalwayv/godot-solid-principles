@@ -24,8 +24,8 @@ func reset(new_position: float, new_velocity: float = 0.0) -> void:
 
 
 func update(delta: float, target: float) -> float:
-	var angular_frequency := maxf(0, frequency)
-	var damp_ratio := maxf(0, damping)
+	var angular_frequency := maxf(0.0, frequency)
+	var damp_ratio := maxf(0.0, damping)
 
 	var pos_pos_coef := 0.0
 	var pos_vel_coef := 0.0
@@ -33,10 +33,10 @@ func update(delta: float, target: float) -> float:
 	var vel_vel_coef := 0.0
 
 	if angular_frequency < EPSILON:
-		pos_pos_coef = 1
-		vel_pos_coef = 0
-		pos_vel_coef = 0
-		vel_vel_coef = 1
+		pos_pos_coef = 1.0
+		vel_pos_coef = 0.0
+		pos_vel_coef = 0.0
+		vel_vel_coef = 1.0
 	elif damp_ratio > 1 + EPSILON:
 		# overdamped
 		var za := -angular_frequency * damp_ratio

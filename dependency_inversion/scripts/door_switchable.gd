@@ -5,7 +5,7 @@ extends Switchable
 
 @export var door_left_offset: Vector3
 @export var door_right_offset: Vector3
-@export_range(0, 1) var speed: float
+@export_range(0.0, 1.0) var speed: float
 
 var door_left_start_position: Vector3
 var door_right_start_position: Vector3

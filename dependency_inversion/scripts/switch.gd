@@ -26,7 +26,7 @@ func _ready() -> void:
 	goal_position = up_position
 	spring_position.reset(goal_position)
 	
-	up_scale = 1
+	up_scale = 1.0
 	down_scale = up_scale - 0.03
 	goal_scale = up_scale
 	spring_scale.reset(goal_scale)
@@ -41,8 +41,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	button_mesh.position.y = spring_position.update(delta, goal_position)
 	
-	var scale_by := spring_scale.update(delta, goal_scale) - 1
-	base_mesh.scale = Vector3(1 - scale_by, 1 + scale_by, 1 - scale_by)
+	var scale_by: float = spring_scale.update(delta, goal_scale) - 1.0
+	base_mesh.scale = Vector3(1.0 - scale_by, 1.0 + scale_by, 1.0 - scale_by)
 
 
 func toggle() -> void:
@@ -56,11 +56,11 @@ func toggle() -> void:
 
 			goal_position = down_position
 			spring_position.position = down_position
-			spring_position.velocity = 0
+			spring_position.velocity = 0.0
 			
 			goal_scale = down_scale
 			spring_scale.position = down_scale
-			spring_scale.velocity = 0
+			spring_scale.velocity = 0.0
 			
 			is_switch_pressed = true
 		else:
@@ -72,7 +72,7 @@ func toggle() -> void:
 			is_switch_pressed = false
 
 
-func nudge_spring(force: float = 1) -> void:
+func nudge_spring(force: float = 1.0) -> void:
 	if is_switch_pressed:
 		return
 		

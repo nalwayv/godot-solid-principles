@@ -6,7 +6,7 @@ const RAY_LENGTH: int = 1000
 @export var camera: Camera3D
 @onready var ray: RayCast3D = $RayCast3D
 
-var hit_position: Vector3
+var global_hit_position: Vector3
 
 
 func _get_mouse_world_space_position() -> Vector3:
@@ -27,5 +27,5 @@ func _get_mouse_world_space_position() -> Vector3:
 
 
 func _process(_delta: float) -> void:
-	hit_position = _get_mouse_world_space_position()
-	$CollisionPoint.position = hit_position
+	global_hit_position = _get_mouse_world_space_position()
+	$CollisionPoint.position = global_hit_position
