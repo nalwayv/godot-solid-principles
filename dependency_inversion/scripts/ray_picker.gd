@@ -3,8 +3,9 @@ extends Camera3D
 
 const RAY_LENGTH: int = 100
 
-@onready var ray: RayCast3D = $RayCast3D
 @export var method_name: String
+
+@onready var ray: RayCast3D = $RayCast3D
 
 
 func _process(_delta: float) -> void:

@@ -10,6 +10,7 @@ const ProjectileScene: PackedScene = preload("uid://d1vhhuefby40m")
 @onready var muzzel_marker: Marker3D = %MuzzelMarker
 @onready var shoot_timer: Timer = $ShootTimer
 @onready var ray_cast: RayCast3D = %RayCast3D
+@onready var shoot_wait_time: float = 1.0 / fire_rate
 
 
 func _exit_tree() -> void:
@@ -36,8 +37,8 @@ func shoot() -> void:
 		
 	var projectile := pool.get_object() as Projectile
 	if projectile != null:
-		projectile.launch(muzzel_marker.global_position, Quaternion(muzzel_marker.global_basis))
-		shoot_timer.start(1.0 / fire_rate)
+		projectile.launch(muzzel_marker.global_transform)
+		shoot_timer.start(shoot_wait_time)
 		
 		ray_cast.force_raycast_update()
 		if ray_cast.is_colliding():

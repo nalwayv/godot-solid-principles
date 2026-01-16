@@ -48,6 +48,7 @@ func _rotate_pan_towards(global_target: Vector3, delta: float) -> void:
 ## Smoothly interpolates the tilt node's rotation on the X-axis to aim
 ## towards the specified target.
 func _rotate_tilt_towards(global_target: Vector3, delta: float) -> void:
+	# convert to local space
 	var direction_to_target: Vector3 = global_target - tilt.global_position
 	var direction_to_local: Vector3 = pan.global_basis.inverse() * direction_to_target
 	
@@ -57,6 +58,7 @@ func _rotate_tilt_towards(global_target: Vector3, delta: float) -> void:
 	tilt_angle_deg = clampf(tilt_angle_deg, max_tilt_down, max_tilt_up)
 	tilt_angle_rad = deg_to_rad(tilt_angle_deg)
 	
+	# update rotation
 	var target_rotation := Basis.from_euler(Vector3(tilt_angle_rad, 0.0, 0.0))
 	tilt.basis = tilt.basis.slerp(target_rotation, tilt_speed * delta)
 	tilt.orthonormalize()

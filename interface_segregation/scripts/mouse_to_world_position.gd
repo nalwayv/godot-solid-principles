@@ -4,9 +4,10 @@ extends Node3D
 const RAY_LENGTH: int = 1000
 
 @export var camera: Camera3D
-@onready var ray: RayCast3D = $RayCast3D
 
 var global_hit_position: Vector3
+
+@onready var ray: RayCast3D = $RayCast3D
 
 
 func _get_mouse_world_space_position() -> Vector3:

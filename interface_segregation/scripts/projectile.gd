@@ -1,5 +1,3 @@
-## NOTE - in the unity project each projectile would check for a collision with the target
-## but for this im using a raycast to handle collision with target
 class_name Projectile
 extends RigidBody3D
 
@@ -9,9 +7,11 @@ extends RigidBody3D
 var muzzel_velocity: float
 var pool: ObjectPool
 
+@onready var timer: Timer = $Timer
+
 
 func _ready() -> void:
-	$Timer.timeout.connect(deactivate)
+	timer.timeout.connect(deactivate)
 	body_entered.connect(_on_body_entered)
 
 
@@ -23,14 +23,11 @@ func deactivate() -> void:
 		pool.release_object(self)
 
 
-## Launches the projectile from a specified position and orientation.
-func launch(start_global_position: Vector3, start_angle: Quaternion):
-	global_position = start_global_position
-	transform.basis = Basis(start_angle)
-	
+## Launches the projectile from a specified transform.
+func launch(start_transform: Transform3D):
+	global_transform = start_transform
 	apply_central_impulse(-basis.z * muzzel_velocity)
-	
-	$Timer.start(lifetime)
+	timer.start(lifetime)
 
 
 func _on_body_entered(_body: Node) -> void:
