@@ -9,7 +9,7 @@ Learning [Godot 4 Engine](https://godotengine.org/) using gdscript by recreating
 - **Dependency Inversion**
 
 ## 📝 Notes
-Using Godot version 4.5.1
+Using Godot version 4.6
 
 Screenshots can be found in the .github file
 

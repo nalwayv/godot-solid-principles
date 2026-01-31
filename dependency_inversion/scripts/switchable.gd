@@ -6,7 +6,7 @@ var is_active: bool
 
 
 func _enter_tree() -> void:
-	owner.set_meta("Switchable", self)
+	owner.add_to_group("switchable")
 
 
 @abstract 

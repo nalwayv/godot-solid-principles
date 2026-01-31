@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://iryn73x65j0k"]
+[gd_scene format=3 uid="uid://iryn73x65j0k"]
 
 [ext_resource type="Script" uid="uid://cvhhxyqoujpgu" path="res://interface_segregation/scripts/hit_effect.gd" id="1_ync41"]
 [ext_resource type="Texture2D" uid="uid://cw5qoq1s846em" path="res://interface_segregation/assets/circle.png" id="2_payj7"]
@@ -35,10 +35,10 @@ albedo_texture = ExtResource("2_payj7")
 material = SubResource("StandardMaterial3D_pgpo5")
 size = Vector2(1, 1)
 
-[node name="HitEffect" type="Node3D"]
+[node name="HitEffect" type="Node3D" unique_id=1025777514]
 script = ExtResource("1_ync41")
 
-[node name="Particles" type="GPUParticles3D" parent="."]
+[node name="Particles" type="GPUParticles3D" parent="." unique_id=1216548497]
 emitting = false
 amount = 1
 lifetime = 0.3

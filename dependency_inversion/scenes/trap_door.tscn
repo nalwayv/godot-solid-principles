@@ -1,14 +1,15 @@
-[gd_scene load_steps=5 format=4 uid="uid://djr27qa88ooyy"]
+[gd_scene format=4 uid="uid://djr27qa88ooyy"]
 
-[ext_resource type="Material" uid="uid://cpx373x0yadlr" path="res://dependency_inversion/assets/trigger_material.tres" id="1_hmb50"]
 [ext_resource type="Script" uid="uid://cg1nl0lvia6mr" path="res://dependency_inversion/scripts/trap_switchable.gd" id="3_i1wli"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hmb50"]
+albedo_color = Color(0.94509804, 0.6392157, 0, 1)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_hovcm"]
 _surfaces = [{
 "aabb": AABB(-1, -0.05, -1, 2, 0.1, 2),
 "attribute_data": PackedByteArray("AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/"),
 "format": 34359738391,
-"material": ExtResource("1_hmb50"),
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 36,
@@ -18,21 +19,23 @@ _surfaces = [{
 [sub_resource type="BoxShape3D" id="BoxShape3D_l4nba"]
 size = Vector3(2, 0.1, 2)
 
-[node name="TrapDoor" type="RigidBody3D"]
+[node name="TrapDoor" type="RigidBody3D" unique_id=1438742851]
 transform = Transform3D(0.9999999, 0, 3.5527137e-15, 0, 1, 0, -3.5527137e-15, 0, 0.9999999, 0, 0, 0)
 angular_damp = 2.0
 
-[node name="HingeJoint" type="HingeJoint3D" parent="."]
+[node name="HingeJoint" type="HingeJoint3D" parent="." unique_id=207942108]
 transform = Transform3D(-4.371137e-08, 0, -0.99999964, 0, 1, 0, 0.99999964, 0, -4.371137e-08, 0, 0, -1)
 node_a = NodePath("..")
 motor/max_impulse = 0.45
 
-[node name="DoorMesh" type="MeshInstance3D" parent="."]
+[node name="DoorMesh" type="MeshInstance3D" parent="." unique_id=2005812073]
+material_override = SubResource("StandardMaterial3D_hmb50")
 mesh = SubResource("ArrayMesh_hovcm")
 
-[node name="CollisionShape" type="CollisionShape3D" parent="."]
+[node name="CollisionShape" type="CollisionShape3D" parent="." unique_id=2056505704]
 shape = SubResource("BoxShape3D_l4nba")
 
-[node name="Switchable" type="Node" parent="." node_paths=PackedStringArray("rigidbody")]
+[node name="Switchable" type="Node" parent="." unique_id=833463224 node_paths=PackedStringArray("rigidbody")]
+unique_name_in_owner = true
 script = ExtResource("3_i1wli")
 rigidbody = NodePath("..")

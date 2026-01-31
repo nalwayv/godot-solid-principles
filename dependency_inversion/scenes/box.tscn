@@ -1,14 +1,13 @@
-[gd_scene load_steps=4 format=4 uid="uid://c3h4n851c8wsk"]
+[gd_scene format=4 uid="uid://c3h4n851c8wsk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1r35c"]
-albedo_color = Color(0, 0.5406032, 0.7898993, 1)
+albedo_color = Color(0.43529412, 0.5647059, 0.95686275, 1)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_1r35c"]
 _surfaces = [{
 "aabb": AABB(-0.55, -0.175, -0.55, 1.1, 0.35, 1.1),
 "attribute_data": PackedByteArray("AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/"),
 "format": 34359738391,
-"material": SubResource("StandardMaterial3D_1r35c"),
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 36,
@@ -18,16 +17,17 @@ _surfaces = [{
 [sub_resource type="BoxShape3D" id="BoxShape3D_k4dmv"]
 size = Vector3(1.1, 0.35, 1.1)
 
-[node name="Box" type="RigidBody3D"]
+[node name="Box" type="RigidBody3D" unique_id=1453480845]
 
-[node name="BoxMesh" type="MeshInstance3D" parent="."]
+[node name="BoxMesh" type="MeshInstance3D" parent="." unique_id=1168056897]
+material_override = SubResource("StandardMaterial3D_1r35c")
 mesh = SubResource("ArrayMesh_1r35c")
 
-[node name="CollisionShape" type="CollisionShape3D" parent="."]
+[node name="CollisionShape" type="CollisionShape3D" parent="." unique_id=1774746976]
 shape = SubResource("BoxShape3D_k4dmv")
 
-[node name="Label" type="Label3D" parent="."]
+[node name="Label" type="Label3D" parent="." unique_id=747475627]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.18004835, 0)
-modulate = Color(0.9901127, 0.7722462, 0, 1)
+modulate = Color(0.95686275, 0.8352941, 0.4392157, 1)
 text = "P"
 font_size = 192

@@ -17,5 +17,6 @@ func activate() -> void:
 
 func deactivate() -> void:
 	is_active = false
+	# reset
 	rigidbody.axis_lock_angular_x = true
 	rigidbody.transform = original_transform
