@@ -78,7 +78,7 @@ func release_button() -> void:
 	goal_scale = up_scale
 
 
-## ad a nudge effect to animate the switch
+## add a nudge effect to animate the switch
 func nudge_spring(force: float = 1.0) -> void:
 	if is_switch_pressed:
 		return
